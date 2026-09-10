@@ -18,6 +18,7 @@
 - runner 解析到本仓库 `verpo_agent` 与锁定依赖的 `risk_aware_opsd`／`verl` 源码路径。这是源码定位检查，没有导入完整 GPU 训练栈。
 - 默认系统 Python 3.9 被预检正确拒绝；使用独立 Python 3.11 开发环境通过。
 - 结构化预检结果见 [preflight.json](preflight.json)，文档检查见 [documentation_validation.json](documentation_validation.json)。
+- 从 GitHub SSH 全新克隆首个提交 `8575c28e2a718753137100a4e458b126b222b3e7`，按 README 初始化直接 submodule，26 项预检全部通过且工作区干净；没有使用本地源码路径替代远程依赖。结果见 [clean_clone_validation.json](clean_clone_validation.json)。
 
 ## 未完成项
 
