@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "scope": "dependency_and_design_only",
+  "training_ready": false,
+  "checks": [
+    {
+      "name": "python_3_10_or_newer",
+      "passed": true
+    },
+    {
+      "name": "dependency_initialized",
+      "passed": true
+    },
+    {
+      "name": "dependency_is_own_worktree",
+      "passed": true
+    },
+    {
+      "name": "dependency_commit_matches_lock",
+      "passed": true
+    },
+    {
+      "name": "gitlink_matches_lock",
+      "passed": true
+    },
+    {
+      "name": "submodule_url_matches_lock",
+      "passed": true
+    },
+    {
+      "name": "dependency_has_no_tracked_edits",
+      "passed": true
+    },
+    {
+      "name": "source:pyproject.toml",
+      "passed": true
+    },
+    {
+      "name": "source:verl/pyproject.toml",
+      "passed": true
+    },
+    {
+      "name": "source:verl/setup.py",
+      "passed": true
+    },
+    {
+      "name": "source:risk_aware_opsd/verpo_zpd.py",
+      "passed": true
+    },
+    {
+      "name": "source:risk_aware_opsd/verpo_topk.py",
+      "passed": true
+    },
+    {
+      "name": "source:risk_aware_opsd/length_aware_reward.py",
+      "passed": true
+    },
+    {
+      "name": "source:verl/verl/trainer/distillation/verpo_zpd.py",
+      "passed": true
+    },
+    {
+      "name": "source:verl/verl/trainer/distillation/verpo_topk.py",
+      "passed": true
+    },
+    {
+      "name": "design_is_not_runnable",
+      "passed": true
+    },
+    {
+      "name": "step_gate_enabled_is_false",
+      "passed": true
+    },
+    {
+      "name": "benefit_predictor_enabled_is_false",
+      "passed": true
+    },
+    {
+      "name": "fec_projection_enabled_is_false",
+      "passed": true
+    },
+    {
+      "name": "replay_is_full_trajectory",
+      "passed": true
+    },
+    {
+      "name": "research_snapshot_commit",
+      "passed": true
+    },
+    {
+      "name": "snapshot_source:agent opsd/agent_verpo_report/VERPO到Agent_VERPO_完整推导.md",
+      "passed": true
+    },
+    {
+      "name": "snapshot_export:docs/research/VERPO到Agent_VERPO_完整推导.md",
+      "passed": true
+    },
+    {
+      "name": "snapshot_source:agent opsd/agent_verpo_report/Agent_VERPO_讨论总结与Observation回放方案.md",
+      "passed": true
+    },
+    {
+      "name": "snapshot_export:docs/research/Agent_VERPO_讨论总结与Observation回放方案.md",
+      "passed": true
+    },
+    {
+      "name": "snapshot_source:agent opsd/agent_verpo_report/Agent_VERPO_联合控制研究与实现报告.md",
+      "passed": true
+    },
+    {
+      "name": "snapshot_export:docs/research/Agent_VERPO_联合控制研究与实现报告.md",
+      "passed": true
+    }
+  ]
+}

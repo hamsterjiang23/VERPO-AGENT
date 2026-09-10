@@ -1,0 +1,24 @@
+{
+  "upstream_commit": "9c01f2bcd05aea1b3741ba60ede9aad201e0875c",
+  "transformation": "rewrite relative links, prepend current-design notice, normalize Markdown hard breaks",
+  "files": [
+    {
+      "source": "agent opsd/agent_verpo_report/VERPO到Agent_VERPO_完整推导.md",
+      "source_sha256": "53ace1c9f5c4ecf7b97a66aa73f69aa216cca086f400151660792769c4eda111",
+      "destination": "docs/research/VERPO到Agent_VERPO_完整推导.md",
+      "export_sha256": "52fa4101fd230868e0ee5d9baf8968d73ad1a8d747fafd0f8093fe09a2494cb1"
+    },
+    {
+      "source": "agent opsd/agent_verpo_report/Agent_VERPO_讨论总结与Observation回放方案.md",
+      "source_sha256": "15c54b027e70d67bbf4a02861621e56dbe67fc6da37ad15db493683e7706911e",
+      "destination": "docs/research/Agent_VERPO_讨论总结与Observation回放方案.md",
+      "export_sha256": "641bcfd7e2c540c2e2d07327138182360ff840c952837a22771c8937c63e4462"
+    },
+    {
+      "source": "agent opsd/agent_verpo_report/Agent_VERPO_联合控制研究与实现报告.md",
+      "source_sha256": "bc8620d62964979dd5413c502fb12aff500833ed1fa7f4f0461302325bda6ce6",
+      "destination": "docs/research/Agent_VERPO_联合控制研究与实现报告.md",
+      "export_sha256": "abaf8b6d0b16673261556e05c838d44e78ca55c60bf035b92e70574e55d7f918"
+    }
+  ]
+}

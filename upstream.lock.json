@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "name": "PGR-Probe",
+  "path": "third_party/PGR-Probe",
+  "url": "git@github.com:hamsterjiang23/PGR-Probe.git",
+  "commit": "9c01f2bcd05aea1b3741ba60ede9aad201e0875c",
+  "source_sha256": {
+    "pyproject.toml": "f8b577178790e9ea13e84411f63a0d1b02191a301d52d9d3dcf53b9624d09eb3",
+    "verl/pyproject.toml": "7a3ec747eec04a3166e432a637aea82eece898d756206bcbe92ccc54d5c3f6ee",
+    "verl/setup.py": "8a50e718dea048460d53ff3abf9c7a71d48af6c733c0e5a91f1313dc15ffbdc8",
+    "risk_aware_opsd/verpo_zpd.py": "8cae4116dcb3d73e9dc00fc7da4291241701373206ba1615846239571a454b21",
+    "risk_aware_opsd/verpo_topk.py": "d23f0dafa9bf8bae05e5cdce8954ace31fc0581e068cced957c6f33e0350d26e",
+    "risk_aware_opsd/length_aware_reward.py": "fdb4f8caf3da9be1ed9de8fc111ef7ae9ed2e3806315296c21329b2b2e5931a8",
+    "verl/verl/trainer/distillation/verpo_zpd.py": "ccc095c0218f3c5ff97b88caa95de0a739cbd1d8baeb67f24dad6702156b2425",
+    "verl/verl/trainer/distillation/verpo_topk.py": "94a21c0d3fdab11d4c5428348d314428733f81b7766a74e1b528a26397092fbc"
+  }
+}

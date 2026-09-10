@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "design_only_not_runnable",
+  "experiment_id": null,
+  "training_enabled": false,
+  "model": null,
+  "environment": null,
+  "dataset_manifest": null,
+  "runtime_profile": null,
+  "teacher_schedule": null,
+  "replay": {
+    "unit": "full_trajectory",
+    "teacher_privilege": "global_observation_prefix",
+    "student_context": "original_causal_history",
+    "policy_loss_mask": "policy_generated_tokens_only",
+    "predictor_alignment": "explicit_per_branch",
+    "observation_ablation": "separate_comparison_arm"
+  },
+  "step_gate_enabled": false,
+  "benefit_predictor_enabled": false,
+  "fec_projection_enabled": false,
+  "token_weight_mode": "uniform_initial_control",
+  "objective_candidates": ["feedback_opd", "observation_residual_verpo"],
+  "reference_coefficient": null,
+  "evidence_coefficient": null,
+  "evaluation_manifest": null
+}
