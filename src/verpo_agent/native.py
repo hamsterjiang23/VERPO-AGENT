@@ -118,7 +118,7 @@ def project_native(c, model_path, dataset_files, identity, *, evaluate=False):
         "data.seed": c["seed"],
         "trainer.use_v1": True,
         "trainer.v1.trainer_mode": "sync",
-        "trainer.v1.sampler.max_off_policy_threshold": 0,
+        "trainer.v1.sampler.max_off_policy_threshold": 1,
         "trainer.v1.sampler.custom_sampler.path": str(
             ROOT / "src/verpo_agent/verl_ext/sampler.py"
         ),
@@ -160,6 +160,27 @@ def project_native(c, model_path, dataset_files, identity, *, evaluate=False):
             values[f"actor_rollout_ref.{part}.fsdp_config.{key}"] = value
     for key, value in values.items():
         OmegaConf.update(cfg, key, value, merge=False, force_add=True)
+    if c["schema_version"] == 2:
+        settings = {
+            "actor_rollout_ref.rollout.agent.default_agent_loop": "agent_verpo_benchmark",
+            "actor_rollout_ref.rollout.multi_turn.tool_config_path": str(
+                output / "benchmark_tool.yaml"
+            ),
+            "actor_rollout_ref.rollout.multi_turn.format": "benchmark_actions",
+            "actor_rollout_ref.rollout.multi_turn.max_parallel_calls": 1,
+            "actor_rollout_ref.rollout.multi_turn.max_assistant_turns": c["max_turns"],
+            "actor_rollout_ref.rollout.multi_turn.max_user_turns": None,
+            "actor_rollout_ref.rollout.val_kwargs.temperature": c["environment"][
+                "evaluation_temperature"
+            ],
+            "actor_rollout_ref.rollout.val_kwargs.do_sample": c["environment"][
+                "evaluation_temperature"
+            ]
+            > 0,
+            "data.continuous_token.enable": False,
+        }
+        for key, value in settings.items():
+            OmegaConf.update(cfg, key, value, merge=False, force_add=True)
     return cfg
 
 
@@ -172,7 +193,23 @@ def run(c, *, evaluate=False):
     c = validate_config(c)
     identity = source_identity()
     runtime = verify_runtime(c["runtime"]["package_versions"])
-    read_dataset(c["dataset_manifest"])
+    rows = read_dataset(c["dataset_manifest"])
+    if c["schema_version"] == 2:
+        from .benchmarks.backends import request_json
+
+        health = request_json(c["environment"]["endpoint"].rstrip("/") + "/health")
+        if (
+            health["identity"] != c["environment"]["identity"]
+            or health["benchmark"] != c["environment"]["benchmark"]
+            or health["manifest_sha256"] != digest(c["dataset_manifest"])
+        ):
+            raise ValueError("Benchmark service/data provenance mismatch")
+        if any(
+            r.get("benchmark") != health["benchmark"]
+            for split in rows.values()
+            for r in split
+        ):
+            raise ValueError("Experiment benchmark does not match dataset episodes")
     if not torch.cuda.is_available():
         raise RuntimeError(
             "Distributed train/evaluate requires the declared CUDA runtime; no training ran"
@@ -215,6 +252,27 @@ def run(c, *, evaluate=False):
             "_target_": "verpo_agent.verl_ext.agent_loop.AgentToolsLoop",
         }
     ]
+    if c["schema_version"] == 2:
+        loop_config = [
+            {
+                "name": "agent_verpo_benchmark",
+                "_target_": "verpo_agent.verl_ext.benchmark_loop.BenchmarkAgentLoop",
+            }
+        ]
+        tools = {
+            "tools": [
+                {
+                    "class_name": "verpo_agent.verl_ext.benchmark_tool.BenchmarkEnvironmentTool",
+                    "config": {
+                        **c["environment"],
+                        "manifest_sha256": digest(c["dataset_manifest"]),
+                        "timeout_seconds": c["timeout_seconds"],
+                        "type": "native",
+                    },
+                }
+            ]
+        }
+        OmegaConf.save(OmegaConf.create(tools), output / "benchmark_tool.yaml")
     OmegaConf.save(OmegaConf.create(loop_config), output / "agent_loop.yaml")
     native = project_native(c, model, files, identity, evaluate=evaluate)
     if os.environ.get("RAY_ADDRESS"):

@@ -18,6 +18,9 @@
 
 ## Implementation and validation
 
+- Benchmark schema 2 uses the native veRL ToolAgentLoop state machine and BaseTool through BenchmarkAgentLoop, not the schema 1 toy collector. ALFWorld, WebShop and Search-QA have episode/resource manifests and a separate environment session service. Follow docs/benchmarks.md; never substitute fixtures for benchmark assets.
+- Pin environment source with benchmark_sources.lock.json. Import only environment packages in the service; never use the reference repository's veRL. Full benchmark asset/runtime and GPU validation remain pending.
+
 - Current delivery includes deterministic tool environments, exact-token trajectories, full-trajectory feedback replay, residual VERPO/OPD objectives, and independent veRL TaskRunner/Trainer/worker/AgentLoop adapters. CPU math, real optimizer/EMA updates, native interfaces, Gloo and Ray/TransferQueue are verified; GPU/FSDP2/NCCL end-to-end training is not yet verified.
 - `configs/observation_replay_design.json` remains a historical non-runnable design contract. The new `configs/agent_tools.template.json` also requires explicit experiment values before launch. The first environment is deterministic lookup/calculation, with GRPO + residual VERPO or feedback OPD, an independent frozen reference and EMA Teacher. A production model, dataset slice, runtime and hardware remain unregistered.
 - Native Agent training uses full-vocabulary forward KL, fixed token weight 1, no group/step gate, no FEC, no extra KL shaping, and action-only global-token loss normalization. Do not route it through old experiment launchers.

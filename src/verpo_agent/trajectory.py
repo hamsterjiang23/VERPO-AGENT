@@ -20,6 +20,7 @@ class Trajectory:
     reward: float = 0.0
     termination: str = "running"
     schema_version: int = 1
+    metadata: dict = field(default_factory=dict)
 
     def append(self, ids, *, policy: bool, logprobs=None):
         ids = list(ids)

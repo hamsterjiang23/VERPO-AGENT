@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import asyncio
+import argparse
+import os
 import copy
 import importlib.metadata
 import io
@@ -132,8 +134,15 @@ def cpu_evidence(directory):
 def main():
     from verpo_agent.provenance import atomic_json, source_identity, digest
 
-    directory = ROOT / "outputs/core_validation"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", default="outputs/core_validation")
+    parser.add_argument(
+        "--report", default="reports/core_implementation/validation.json"
+    )
+    args = parser.parse_args()
+    directory = ROOT / args.output
     directory.mkdir(parents=True, exist_ok=True)
+    os.environ["VERPO_ACCEPTANCE_ARTIFACTS"] = str(directory.resolve())
 
     class RecordingResult(unittest.TextTestResult):
         def __init__(self, *args, **kwargs):
@@ -181,14 +190,14 @@ def main():
             "packages": packages,
         },
         "cpu_evidence": evidence,
-        "artifact_directory": "outputs/core_validation",
+        "artifact_directory": args.output,
         "scope": "CPU kernels, native interfaces, real Ray/TransferQueue, Gloo, and random-model optimizer updates",
         "rollout_evidence": "scripted deterministic tools; not model-generated agent performance",
         "gpu_fsdp2_nccl_validated": False,
         "formal_training_started": False,
         "task_performance_claimed": False,
     }
-    atomic_json(ROOT / "reports/core_implementation/validation.json", report)
+    atomic_json(ROOT / args.report, report)
     return 0 if result.wasSuccessful() else 1
 
 

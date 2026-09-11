@@ -1,0 +1,28 @@
+{
+  "benchmark": "webshop",
+  "paper": "https://arxiv.org/html/2608.05987v1",
+  "engine_source_commit": "0c478b2d7cdc201d9b1f076ec5b3dec7e88a161b",
+  "max_interaction_turns": 15,
+  "per_turn_response_tokens": 512,
+  "paper_prompt_limit": 4096,
+  "training_reward": "binary_terminal_success",
+  "environment_seed": 0,
+  "skill_context": false,
+  "invalid_action_penalty": false,
+  "exact_paper_reproduction": false,
+  "differences": [
+    "VERPO objective and EMA teacher are project-specific",
+    "Complete causal trajectory retained; no rolling history window",
+    "Project-owned prompt wording with official action syntax",
+    "Explicit disjoint validation/test manifests; fixed subset IDs must be registered"
+  ],
+  "metrics": [
+    "score_0_to_100",
+    "success_percent"
+  ],
+  "paper_evaluation_count": 128,
+  "reference_goal_partitions": {
+    "train": ">=500",
+    "evaluation": "<500"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "objective": "residual_verpo",
+  "model": {
+    "path": null,
+    "revision": null
+  },
+  "runtime": {
+    "nnodes": null,
+    "gpus_per_node": null,
+    "tensor_parallel_size": null,
+    "micro_batch_size_per_gpu": null,
+    "vllm_memory_utilization": null,
+    "package_versions": {
+      "torch": null,
+      "transformers": null,
+      "ray": null,
+      "vllm": null,
+      "tensordict": null,
+      "transfer_queue": null
+    }
+  },
+  "dataset_manifest": null,
+  "output_dir": null,
+  "seed": null,
+  "train_steps": null,
+  "train_batch_size": null,
+  "group_size": null,
+  "learning_rate": null,
+  "clip_ratio": null,
+  "ema_decay": null,
+  "lambda_ref": null,
+  "lambda_feedback": null,
+  "max_prompt_tokens": 4096,
+  "max_response_tokens": null,
+  "max_replay_tokens": null,
+  "max_action_tokens": 512,
+  "max_turns": 15,
+  "timeout_seconds": null,
+  "validation_interval": null,
+  "checkpoint_interval": null,
+  "environment": {
+    "benchmark": "webshop",
+    "endpoint": "http://127.0.0.1:8101",
+    "identity": null,
+    "evaluation_temperature": 0.4
+  }
+}

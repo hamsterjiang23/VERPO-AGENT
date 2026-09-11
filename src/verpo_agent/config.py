@@ -36,11 +36,12 @@ REQUIRED = {
 
 def validate_config(value):
     c = copy.deepcopy(value)
-    if set(c) != REQUIRED:
+    required = REQUIRED | ({"environment"} if c.get("schema_version") == 2 else set())
+    if set(c) != required:
         raise ValueError(
-            f"Config keys missing={sorted(REQUIRED - set(c))}, unknown={sorted(set(c) - REQUIRED)}"
+            f"Config keys missing={sorted(required - set(c))}, unknown={sorted(set(c) - required)}"
         )
-    if c["schema_version"] != 1 or c["objective"] not in {
+    if c["schema_version"] not in (1, 2) or c["objective"] not in {
         "residual_verpo",
         "feedback_opd",
     }:
@@ -136,6 +137,40 @@ def validate_config(value):
     for key in ("dataset_manifest", "output_dir"):
         if not isinstance(c[key], str) or not c[key]:
             raise ValueError(f"{key} is required")
+    if c["schema_version"] == 2:
+        from .benchmarks.protocol import BENCHMARKS
+        from urllib.parse import urlsplit
+
+        e = c["environment"]
+        if (
+            set(e) != {"benchmark", "endpoint", "identity", "evaluation_temperature"}
+            or e["benchmark"] not in BENCHMARKS
+        ):
+            raise ValueError("Invalid benchmark environment configuration")
+        if (
+            not isinstance(e["endpoint"], str)
+            or urlsplit(e["endpoint"]).scheme not in {"http", "https"}
+            or not urlsplit(e["endpoint"]).hostname
+        ):
+            raise ValueError("Configure the running benchmark service endpoint")
+        if (
+            not isinstance(e["identity"], str)
+            or len(e["identity"]) != 64
+            or any(x not in "0123456789abcdef" for x in e["identity"])
+        ):
+            raise ValueError("Pin the environment service identity from /health")
+        if (
+            c["max_turns"] != BENCHMARKS[e["benchmark"]]
+            or c["max_action_tokens"] != 512
+        ):
+            raise ValueError(
+                "Paper profiles require 512 tokens per turn and horizons 50/15/4"
+            )
+        if (
+            type(e["evaluation_temperature"]) not in (int, float)
+            or not 0 <= e["evaluation_temperature"] <= 1
+        ):
+            raise ValueError("Explicit evaluation temperature in [0,1] is required")
     return c
 
 

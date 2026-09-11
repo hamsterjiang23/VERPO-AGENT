@@ -8,6 +8,15 @@ from pathlib import Path
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="verpo-agent")
     commands = parser.add_subparsers(dest="command", required=True)
+    prepare = commands.add_parser("prepare-benchmark")
+    prepare.add_argument("--selection", required=True)
+    prepare.add_argument("--output", required=True)
+    service = commands.add_parser("serve-environment")
+    service.add_argument("--config", required=True)
+    service.add_argument("--host", default="127.0.0.1")
+    service.add_argument("--port", type=int, required=True)
+    inspect = commands.add_parser("check-environment")
+    inspect.add_argument("--config", required=True)
     for name in ("validate-config", "train", "evaluate"):
         command = commands.add_parser(name)
         command.add_argument("--config", required=True)
@@ -23,7 +32,29 @@ def main(argv=None):
     audit.add_argument("--max-length", type=int, required=True)
     audit.add_argument("--output", required=True)
     args = parser.parse_args(argv)
-    if args.command == "generate-data":
+    if args.command == "prepare-benchmark":
+        from .benchmarks.data import prepare
+
+        print(prepare(args.selection, args.output))
+    elif args.command == "serve-environment":
+        from .benchmarks.service import serve
+
+        serve(args.config, args.host, args.port)
+    elif args.command == "check-environment":
+        from .benchmarks.service import load_service_config, verify_service
+
+        rows, identity = verify_service(load_service_config(args.config))
+        print(
+            json.dumps(
+                {
+                    "status": "passed",
+                    "identity": identity,
+                    "scope": "resources_and_runtime_only",
+                    "splits": {k: len(v) for k, v in rows.items()},
+                }
+            )
+        )
+    elif args.command == "generate-data":
         from .data import write_dataset
 
         print(
@@ -60,6 +91,14 @@ def main(argv=None):
             from .provenance import source_identity
 
             data = read_dataset(config["dataset_manifest"])
+            if config["schema_version"] == 2 and any(
+                row.get("benchmark") != config["environment"]["benchmark"]
+                for rows in data.values()
+                for row in rows
+            ):
+                raise ValueError(
+                    "Benchmark configuration and episode manifest disagree"
+                )
             print(
                 json.dumps(
                     {

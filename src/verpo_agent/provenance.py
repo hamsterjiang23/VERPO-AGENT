@@ -47,7 +47,12 @@ def source_identity():
     files = (
         list((ROOT / "src/verpo_agent").rglob("*.py"))
         + list((ROOT / "scripts").glob("*.py"))
-        + [ROOT / "pyproject.toml", ROOT / "upstream.lock.json"]
+        + [
+            ROOT / "pyproject.toml",
+            ROOT / "upstream.lock.json",
+            ROOT / "benchmark_sources.lock.json",
+        ]
+        + list((ROOT / "configs/benchmarks").glob("*.json"))
     )
     manifest = {str(p.relative_to(ROOT)): digest(p) for p in sorted(files)}
     return {

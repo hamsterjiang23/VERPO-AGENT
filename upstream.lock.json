@@ -23,6 +23,12 @@
     "verl/verl/trainer/ppo/core_algos.py": "37fa248bdeeef4311dfa40b799786fd8bd6cd6013319223d2540685fce80f843",
     "verl/verl/trainer/main_ppo.py": "604768959e638d8e58969c72da65e0e722e0311c575899032e91ec29054250ff",
     "verl/verl/utils/tensordict_utils.py": "4dc4c321a51e256232751ddb5cb2a2be129076e7f02f36a685fcad6d0d98f5f1",
-    "verl/verl/trainer/config/_generated_ppo_trainer.yaml": "dede95a3c5d8ae313261ffbde0aab4d0a31993a9037c4643a122e88e975b4d1d"
+    "verl/verl/trainer/config/_generated_ppo_trainer.yaml": "dede95a3c5d8ae313261ffbde0aab4d0a31993a9037c4643a122e88e975b4d1d",
+    "verl/verl/experimental/agent_loop/agent_loop.py": "b9e32e8c70bc28bccdd961c886ff75b723dd621428170f8d9cbb8ece361b64a5",
+    "verl/verl/experimental/agent_loop/tool_agent_loop.py": "9ab657e81a6fbc6b08ff061df17aaaed09a8f1dca8d5f7220413e45b7e1548fb",
+    "verl/verl/experimental/agent_loop/tool_parser.py": "a5209fff937ae8e5fd64f0d5f6b9a771750fa69b45c4665250fb7c82dd81db16",
+    "verl/verl/tools/base_tool.py": "2a6ab14f689b9f44b8aa96f0bb881a2013a6c656bcb8ec088930bf8a4d2fc739",
+    "verl/verl/tools/tool_registry.py": "980faf7955015c055c8d30a355d8221709770d3d6582f2ca13faf76f1e660609",
+    "verl/verl/tools/schemas.py": "b5c3a38a44015c27da2dcf1a1f5204f038b895bbf3678c4b1575f62fe1ba5c08"
   }
 }

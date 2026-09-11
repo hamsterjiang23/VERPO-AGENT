@@ -1,0 +1,14 @@
+{
+  "benchmark": "alfworld",
+  "manifest": null,
+  "output_dir": null,
+  "resource_manifest": null,
+  "package_versions": {},
+  "max_sessions": 128,
+  "session_ttl_seconds": 3600,
+  "backend": {
+    "source_root": null,
+    "data_root": null,
+    "alfworld_config": null
+  }
+}

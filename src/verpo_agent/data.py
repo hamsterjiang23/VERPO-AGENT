@@ -35,6 +35,10 @@ def write_dataset(directory, seed, counts):
 def read_dataset(manifest_path):
     path = Path(manifest_path)
     manifest = json.loads(path.read_text())
+    if manifest.get("schema_version") == 2:
+        from .benchmarks.data import read_manifest
+
+        return read_manifest(path)
     if (
         manifest["schema_version"] != 1
         or manifest["generator"] != "lookup_calculate_v1"
@@ -71,9 +75,22 @@ def native_dataset_files(manifest_path, directory):
         path = directory / f"{split}.jsonl"
         native = [
             {
-                "data_source": "agent_tools_v1",
-                "agent_name": "agent_verpo_tools",
-                "prompt": [{"role": "user", "content": initial_prompt(row)}],
+                "data_source": row.get(
+                    "subset", row.get("benchmark", "agent_tools_v1")
+                ),
+                "agent_name": "agent_verpo_benchmark"
+                if "benchmark" in row
+                else "agent_verpo_tools",
+                "prompt": [
+                    {
+                        "role": "user",
+                        "content": row.get(
+                            "question", "Interact with the benchmark environment."
+                        )
+                        if "benchmark" in row
+                        else initial_prompt(row),
+                    }
+                ],
                 "reward_model": {"style": "rule", "ground_truth": ""},
                 "extra_info": {"task": row, "index": i},
             }

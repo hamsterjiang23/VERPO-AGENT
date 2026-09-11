@@ -1,0 +1,15 @@
+{
+  "benchmark": "search_qa",
+  "manifest": null,
+  "output_dir": null,
+  "resource_manifest": null,
+  "package_versions": {},
+  "max_sessions": 128,
+  "session_ttl_seconds": 3600,
+  "backend": {
+    "search_url": "http://127.0.0.1:8000/retrieve",
+    "topk": 3,
+    "timeout_seconds": 30,
+    "retriever_provenance": null
+  }
+}

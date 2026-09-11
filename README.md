@@ -2,7 +2,7 @@
 
 多轮 Agent 的反馈回放与 GRPO 蒸馏实验仓库。Student 执行工具任务后，EMA Teacher 带着真实执行反馈回放完整轨迹；训练仍使用 Student 原来的因果历史。
 
-**当前已有核心代码及 veRL 分布式扩展，提供残差 VERPO 与反馈 OPD 两个目标。CPU、原生接口、Gloo 和 Ray/TransferQueue 的验证见[实现报告](reports/core_implementation/README.md)。尚未进行 GPU/FSDP2/NCCL 端到端验证，也未启动正式训练。**
+**已接入 veRL 原生 `ToolAgentLoop` / `BaseTool`，提供 ALFWorld、WebShop、Search-QA 环境适配与配置。见[benchmark 部署](docs/benchmarks.md)和[适配验证报告](reports/benchmark_adaptation/README.md)。CPU 接口验证不代表全量 benchmark 或 GPU 验收；未启动正式训练。**
 
 ## 两个目标
 
@@ -22,7 +22,7 @@ git submodule update --init third_party/PGR-Probe
 bash scripts/setup_dev.sh
 uv pip install --python .venv/bin/python -e '.[cpu]'
 .venv/bin/python scripts/preflight.py
-.venv/bin/python scripts/run_with_upstream.py -- python scripts/verify_core.py
+.venv/bin/python scripts/run_with_upstream.py -- python scripts/verify_core.py --output outputs/benchmark_validation --report reports/benchmark_adaptation/validation.json
 ```
 
 验证脚本运行完整 unittest、真实本地 Ray/TransferQueue 和双进程 Gloo，并保存随机小模型的实际 optimizer 更新、EMA 状态及回放记录。脚本化工具轨迹用于工程验证，不作为 Agent 能力结果。
@@ -35,6 +35,8 @@ uv pip install --python .venv/bin/python -e '.[cpu]'
 .venv/bin/python scripts/run_with_upstream.py -- python -m verpo_agent --help
 ```
 
+上述生成器是 lookup/calculation 回归 fixture。实际 benchmark 使用 [configs/benchmarks](configs/benchmarks)，按[部署流程](docs/benchmarks.md)注册真实资源。旧 toy 配置保留用于回归验证。
+
 将[配置模板](configs/agent_tools.template.json)复制到自己的运行目录，显式填写模型完整 revision、runtime、数据 manifest、GPU 数量及实验超参数。模板中的 null 必须填写，不是可启动实验。
 
 ```bash
@@ -45,7 +47,7 @@ uv pip install --python .venv/bin/python -e '.[cpu]'
 
 `validate-config` 不分配 GPU；`train` 实际进入 veRL 训练，需先安装并匹配已注册 CUDA runtime；`evaluate` 恢复当前运行最近的完整 checkpoint，使用独立 test split。尚无 checkpoint 时评测初始 Student，并记录 step 0。以上命令只是使用说明，本次没有执行正式训练。
 
-首版支持文本因果模型、FSDP2、vLLM、全参数更新、SP=1、非 fused full logits；采样温度为 1，评测贪心。模型须有可用的 tokenizer/chat template，且上下文容量覆盖 Teacher 回放预算。工具交互本身采用固定文本/JSON 协议，不依赖模型原生 tool-call parser。详细参数与部署限制见[运行合同](docs/implementation.md)。
+首版支持文本因果模型、FSDP2、vLLM、全参数更新、SP=1、非 fused full logits；训练采样温度为 1，benchmark 评测温度显式配置。模型须有可用的 tokenizer/chat template，且上下文容量覆盖 Teacher 回放预算。benchmark 使用注册于 ToolAgentLoop 的动作 parser 与跨轮持久 BaseTool 会话。详细参数与部署限制见[运行合同](docs/implementation.md)。
 
 ## 来源与记录
 

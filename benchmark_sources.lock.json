@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "agentopsd": {
+    "url": "https://github.com/ZethWang/AgentOPSD.git",
+    "commit": "0c478b2d7cdc201d9b1f076ec5b3dec7e88a161b",
+    "paper": "https://arxiv.org/html/2608.05987v1",
+    "usage": "Environment implementation reference only; never import its verl or training algorithm",
+    "source_sha256": {
+      "agent_system/environments/env_package/alfworld/envs.py": "24ae5d08b04eef4a7625bd8fdaa10f4edabfb655b8a069c456d277a5a036dfef",
+      "agent_system/environments/env_package/alfworld/projection.py": "e794d1217d613ef4b550cfe4bfd0b39b4deb10d47493f31f78aef7b5ebf6dd98",
+      "agent_system/environments/env_package/alfworld/configs/config_tw.yaml": "a33f87ab43253ea602f93c9a0b176771a8ae16a34cd953130e45fc03700f1f49",
+      "agent_system/environments/env_package/webshop/envs.py": "370962cf9abc5c0796ca3a9f228811ee109aadbb1c12d9d044fc3ac4318d7e33",
+      "agent_system/environments/env_package/webshop/projection.py": "0808d4643459acf2a4c496eab3fc8735025c440f28cc517066355a1f5fbc048f",
+      "agent_system/environments/env_package/webshop/webshop/web_agent_site/envs/web_agent_text_env.py": "a2a2cfe3e7ef493857ba68c28fd6d12ec012e0f8cb31a050112f6466084e3f55",
+      "agent_system/environments/env_package/search/envs.py": "5d13f03be97c75430c4d36ea063ec8c02bed31b2f21625604177b425112bcee3",
+      "agent_system/environments/env_package/search/projection.py": "9c8d9f113e038201cfa263b45cf375dd4ecef701421bdb38c62f8136f163e925",
+      "agent_system/environments/env_package/search/third_party/skyrl_gym/envs/search/utils.py": "989d04655cd9441ee004c1f9c612d7ced21a96b71b88aecf7c7333978960da01",
+      "agent_system/environments/env_package/search/third_party/skyrl_gym/tools/search.py": "f91d705da8bd10b3ae52fc304b2d5ace400853a6960802c424168a98f4f3f836",
+      "examples/agentopsd_trainer/run_alfworld_3b.sh": "899f0065b41ffb520d7153a89542cda851f6fe7f088cafd8800273303fe28670",
+      "examples/agentopsd_trainer/run_webshop_3b.sh": "c1444bbf15d30104e69c1bc70b5180573c158dac95f47848c1478f3faa36aec8",
+      "examples/agentopsd_trainer/run_search_3b.sh": "4a8ae44390127d313ff3e556cc4f1f34fdcbd421260805931c2908f7e19cdbd5"
+    }
+  }
+}

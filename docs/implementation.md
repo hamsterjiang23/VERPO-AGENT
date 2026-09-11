@@ -1,4 +1,6 @@
-# 首版实现与运行合同
+# 实现与运行合同
+
+Schema 2 新增原生 ToolAgentLoop / BaseTool benchmark 适配，配置与资源部署见 [benchmarks.md](benchmarks.md)。下文 lookup/calculation 与 schema 1 的说明保留作核心回归合同；实际 benchmark 采用独立的环境服务、数据 manifest、每轮动作预算与评测温度。
 
 ## 训练语义
 

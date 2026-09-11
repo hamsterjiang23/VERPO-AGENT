@@ -1,0 +1,31 @@
+{
+  "benchmark": "search_qa",
+  "provenance": {
+    "source_commit": "0c478b2d7cdc201d9b1f076ec5b3dec7e88a161b",
+    "selection_rule": null,
+    "dataset_revision": null
+  },
+  "splits": {
+    "train": [
+      {
+        "path": null,
+        "sha256": null,
+        "subset": null
+      }
+    ],
+    "validation": [
+      {
+        "path": null,
+        "sha256": null,
+        "subset": null
+      }
+    ],
+    "test": [
+      {
+        "path": null,
+        "sha256": null,
+        "subset": null
+      }
+    ]
+  }
+}
