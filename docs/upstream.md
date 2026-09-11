@@ -6,7 +6,7 @@ PGR-Probe 是源码依赖，固定提交见[依赖锁](../upstream.lock.json)。
 
 上游根 pyproject 当前只打包 `src*`；本地修改的 veRL 又导入 `risk_aware_opsd`。只安装上游根包或只安装 PyPI veRL 都不足以复现其运行代码。
 
-`scripts/run_with_upstream.py` 先验证 gitlink、lock、checkout 和源码指纹一致，再在子进程中加入源码路径。训练依赖由未来 GPU runtime 单独锁定；本次只安装无第三方运行依赖的 `VERPO-AGENT` 开发包。
+`scripts/run_with_upstream.py` 先验证 gitlink、lock、checkout 和源码指纹一致，再在子进程中加入源码路径。GPU 训练依赖由具体实验的 runtime 单独锁定；`.[cpu]` 提供核心验证依赖，不包含 vLLM/CUDA runtime。CPU 安装成功不代表 GPU 训练环境验证通过。
 
 不要调用上游旧 `pipeline/verl_math/run.sh` 来假装启动新的 Agent 协议。它有自己的已注册数据、配置与引擎语义。
 

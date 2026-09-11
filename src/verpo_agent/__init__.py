@@ -1,3 +1,3 @@
-"""Agent OPSD project scaffold; training adapters are not implemented yet."""
+"""Agent feedback replay and GRPO distillation with pinned veRL adapters."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

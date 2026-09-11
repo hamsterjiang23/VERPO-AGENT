@@ -18,8 +18,11 @@
 
 ## Implementation and validation
 
-- Current delivery is an installable package scaffold, version checks, dependency runner and research docs. There is no implemented Agent trainer or environment adapter yet.
-- `configs/observation_replay_design.json` is a non-runnable design contract. Do not describe it as a launchable protocol. A model, environment, dataset manifest, runtime and evaluation protocol remain undecided.
+- Current delivery includes deterministic tool environments, exact-token trajectories, full-trajectory feedback replay, residual VERPO/OPD objectives, and independent veRL TaskRunner/Trainer/worker/AgentLoop adapters. CPU math, real optimizer/EMA updates, native interfaces, Gloo and Ray/TransferQueue are verified; GPU/FSDP2/NCCL end-to-end training is not yet verified.
+- `configs/observation_replay_design.json` remains a historical non-runnable design contract. The new `configs/agent_tools.template.json` also requires explicit experiment values before launch. The first environment is deterministic lookup/calculation, with GRPO + residual VERPO or feedback OPD, an independent frozen reference and EMA Teacher. A production model, dataset slice, runtime and hardware remain unregistered.
+- Native Agent training uses full-vocabulary forward KL, fixed token weight 1, no group/step gate, no FEC, no extra KL shaping, and action-only global-token loss normalization. Do not route it through old experiment launchers.
+- Teacher replay must finish and Student parameters must be restored before creating the Student autograd graph. Preserve the upstream successful-update EMA hook and checkpoint state. Use veRL's jagged TensorDict row-selection helpers, not unsupported ordinary advanced indexing.
+- Validate changes with `python scripts/run_with_upstream.py -- python scripts/verify_core.py` after installing `.[cpu]`. This performs only CPU acceptance and scripted random-model replay checks, not a formal training experiment.
 - Formal training is not authorized by repository creation. Future training requires a concrete user-requested experiment with preflight on the target hardware.
 - Do not add placeholder training commands that return success without training.
 - Verify provenance with `python scripts/preflight.py`; run `python -m unittest discover -s tests -v` for changes to the dependency checks.

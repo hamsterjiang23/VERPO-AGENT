@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "tests_run": 23,
+  "passed_tests": [
+    "test_core.EnvironmentTests.test_dataset_hashes_splits_and_config",
+    "test_core.EnvironmentTests.test_multiturn_rollout_preserves_observation_and_actual_tokens",
+    "test_core.EnvironmentTests.test_safe_calculation_and_errors",
+    "test_core.EnvironmentTests.test_timeout_and_length_are_recorded",
+    "test_core.LossTests.test_exact_formula_and_gradient_both_arms",
+    "test_core.LossTests.test_real_optimizer_ema_exception_and_resume",
+    "test_core.LossTests.test_zero_residual_and_nonpolicy_positions",
+    "test_core.TrajectoryTests.test_invalid_masks_logprobs_empty",
+    "test_core.TrajectoryTests.test_jagged_reorder_serialization_microbatch",
+    "test_core.TrajectoryTests.test_roundtrip_alignment_and_no_privilege_leak",
+    "test_distributed.DistributedTests.test_two_rank_gloo_matches_single_batch",
+    "test_native.NativeContractTests.test_actual_verl_loss_interface_and_teacher_order",
+    "test_native.NativeContractTests.test_native_entry_imports_and_worker_selection",
+    "test_native.NativeContractTests.test_native_projection_disables_legacy_experiments",
+    "test_native.NativeContractTests.test_real_transfer_queue_roundtrip",
+    "test_native.NativeContractTests.test_worker_accepts_frozen_native_config",
+    "test_preflight.ProvenanceTests.test_clean_fixture_passes_without_claiming_training_ready",
+    "test_preflight.ProvenanceTests.test_dirty_dependency_fails",
+    "test_preflight.ProvenanceTests.test_forbidden_gate_fails",
+    "test_preflight.ProvenanceTests.test_manifest_path_escape_fails",
+    "test_preflight.ProvenanceTests.test_missing_dependency_fails",
+    "test_preflight.ProvenanceTests.test_staged_gitlink_drift_fails",
+    "test_preflight.ProvenanceTests.test_wrong_pin_fails"
+  ],
+  "test_source_sha256": {
+    "tests/helpers.py": "b82aa62e3448e3741fea93a36c44450d84ee7f632428a6f57fb4d715510cb4c4",
+    "tests/test_core.py": "3d1f5909b79a6ad5a5e8d044f1ad820b976941f38bef91145e998f08f9ffbd6f",
+    "tests/test_distributed.py": "028b921a2e6c34c1ede168f7f50dd7639f7b2c5280807e868ae132473178bb2e",
+    "tests/test_native.py": "11d01c2f52068ffad5a21e7729fea8f038b3c3defedc14883b51ad4e709a4700",
+    "tests/test_preflight.py": "521364574fa85dd256a75546aed3d5d0f7dff4f6fcc97096babfc993efaaa97c"
+  },
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "source": {
+    "agent_commit": "bee3bf52353ccd93916aee66a405e08a8d4675cb",
+    "upstream_commit": "9c01f2bcd05aea1b3741ba60ede9aad201e0875c",
+    "agent_source_sha256": "93b5c6d45dda7896f865991ec22b013d2984d25ade77427529dc3a6f5682eb7d",
+    "files": {
+      "pyproject.toml": "26c1c125984311d094ad43900a850a99258a1092d1f5d7ce50c682bc146221a7",
+      "scripts/preflight.py": "5c73f65186bc8ac9a8140b4a82d9a8132db6e81bc352cabc7ebad99a68c2db46",
+      "scripts/run_with_upstream.py": "56a1f95e61212a599e3c2c8da06975e8fc7235dc2a241bce1924cb11e1df7461",
+      "scripts/sync_research.py": "27767d35dbcf14085dc7ae54d8084682e35e253905bc6d303d3788f108ea5c45",
+      "scripts/verify_core.py": "73846eeb1b8b6b6b1d187ef7bc5721a16cbd1091fa969858efe9fc64104b2990",
+      "src/verpo_agent/__init__.py": "cccd2f0eba42d414cd50bf115d6e4a51db7894992a10129486fdb931fa65c862",
+      "src/verpo_agent/__main__.py": "23ff779f055a2839866e7bf5be897a2882437d07a73a0f202cdc1b2bae320664",
+      "src/verpo_agent/config.py": "46986bd0d1b4fd79b2ee3580fdd750879b509e267537d26a5c1bcce098d88196",
+      "src/verpo_agent/data.py": "dc67d9c61a2298e28adf17c565437c6c8d7c904dd26a53b6338f153ae8b27bc8",
+      "src/verpo_agent/environment.py": "7260579d7b81911b2d132fc8dd992d404b6fa02d82e8291bb8d95656a9818019",
+      "src/verpo_agent/evaluation.py": "1f1d1760a54e10087946cbb8cb4f262260c8b8a61e3d40c6da607df344505030",
+      "src/verpo_agent/native.py": "cb68f88eb30feeebd5826590d1d591bada0025f440b556cfedbc5841d12492e9",
+      "src/verpo_agent/objectives.py": "b422d298814d30dc69a36cf04dc8e6ba41d47c1f1f879efc093ffaa99474f174",
+      "src/verpo_agent/provenance.py": "dae18a8cd8fdc01027640565d280f804740c0803b80a8e8dbe8725ef908119ad",
+      "src/verpo_agent/replay.py": "91529ead7efd5496ee90d5a1634341fd839106a0a877efc5a268b29f1f186452",
+      "src/verpo_agent/rollout.py": "0bd9c75fa2e36a972e9bded2bcd00e09d92083175ce65ea50aa6222ad3b8d064",
+      "src/verpo_agent/trajectory.py": "c7cac0b87bf78dc7937190cc71484c26ed31fab764aeb98ec28bbc3a58a3ae92",
+      "src/verpo_agent/verl_ext/__init__.py": "f11d30f0333214f368ae5396333874a265295018ef131aa8206b485be5baf42a",
+      "src/verpo_agent/verl_ext/agent_loop.py": "0edb13813a7bae5cc545e655b101591abaf201dddf0c3800893e3c011de4a97d",
+      "src/verpo_agent/verl_ext/entry.py": "c5cf4ce9e5a6e689ac49dfa6f2db4d361c69f819ca87a7771d0ca364a7d940c5",
+      "src/verpo_agent/verl_ext/loss.py": "2ccbc52dfc1441818ca82c3ab66dea89aa7c9f8510bd6fb70f325c630ea0cca5",
+      "src/verpo_agent/verl_ext/sampler.py": "015911bfda0308701b49dee9c89addcbae6e28eb145f2c477ca31c095fe19818",
+      "src/verpo_agent/verl_ext/trainer.py": "5263a37cc6218cca7ba5d7061c3ae8c128162fcc63e00e325ea20cbab3a5b8ad",
+      "src/verpo_agent/verl_ext/workers.py": "5c1feb36595666fd210d911ee259c2be76a5d13f4ca25ddf3174e31ecb88cff8",
+      "upstream.lock.json": "c9a10d16baed550622e26d833e12d7b49331133328623a737c808fbe75a2b3db"
+    }
+  },
+  "runtime": {
+    "python": "3.11.0",
+    "system": "Darwin",
+    "packages": {
+      "torch": "2.8.0",
+      "numpy": "2.2.6",
+      "transformers": "4.56.2",
+      "ray": "2.48.0",
+      "tensordict": "0.10.0",
+      "TransferQueue": "0.1.8"
+    }
+  },
+  "cpu_evidence": {
+    "residual_verpo": {
+      "reference_loss": 0.0,
+      "feedback_loss": -0.00012686304398812354,
+      "loss": -0.00012686304398812354,
+      "gradient_norm": 0.0009574112482368946,
+      "parameter_delta_l2": 0.052504997700452805,
+      "ema_updates": 1,
+      "action_tokens": 86
+    },
+    "feedback_opd": {
+      "reference_loss": 0.0,
+      "feedback_loss": 2.3431539375451393e-05,
+      "loss": 2.3431539375451393e-05,
+      "gradient_norm": 0.0009574119467288256,
+      "parameter_delta_l2": 0.05250491574406624,
+      "ema_updates": 1,
+      "action_tokens": 86
+    }
+  },
+  "artifact_directory": "outputs/core_validation",
+  "scope": "CPU kernels, native interfaces, real Ray/TransferQueue, Gloo, and random-model optimizer updates",
+  "rollout_evidence": "scripted deterministic tools; not model-generated agent performance",
+  "gpu_fsdp2_nccl_validated": false,
+  "formal_training_started": false,
+  "task_performance_claimed": false
+}

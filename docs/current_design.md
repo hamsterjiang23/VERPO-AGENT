@@ -2,6 +2,8 @@
 
 2026-09-10：从 PGR-Probe 的 Agent VERPO 讨论建立独立实验仓库。
 
+2026-09-11：首版核心代码与 veRL 扩展已实现，见[运行合同](implementation.md)及[验证报告](../reports/core_implementation/README.md)。当前为 CPU/接口验证状态，尚无 GPU 训练结果。
+
 ## 已确认
 
 - Student 按原始因果历史在环境中生成完整轨迹。
@@ -14,17 +16,15 @@
 
 ## 仍需决定
 
-初始环境、模型、轨迹长度与 batch、Teacher 更新方式、奖励定义、reference 和 evidence 系数、选定目标及验证集都未注册。配置文件中的 null 是未决定，不得被 launcher 自动替换成旧实验默认值。
+已确定本地查询/计算工具环境、二元结果奖励、EMA Teacher，以及共享冻结 reference 的 GRPO+残差 VERPO 和 GRPO+反馈 OPD 两组目标。模型、轨迹长度与 batch、EMA decay、reference/feedback 系数、runtime、GPU 和具体数据切片仍需注册。配置文件中的 null 不得被 launcher 自动替换成旧实验默认值。
 
-绝对 feedback OPD 与 observation-residual VERPO 是两条不同训练目标。后者可复用上游概率差／log-density 的数学身份，但 Teacher 证据构造和回放接口需要新增。使用未来信息的目标不能直接继承原可预测方向理论保证。
+绝对 feedback OPD 与 observation-residual VERPO 是两条不同训练目标。后者复用上游 Fixed FKL 概率差核，Teacher 证据构造和显式对齐由本仓库实现。使用未来信息的目标不能直接继承原可预测方向理论保证。
 
-## 下一阶段实现顺序
+## 下一阶段验收
 
-1. 固定一个环境、模型和可审计的小数据切片，注册训练与评测合同。
-2. 保存真实多轮轨迹及所有工具失败，验证逐步历史可恢复。
-3. 实现整轨迹反馈打包与 token 预测位置对齐，先做冻结模型回放核对。
-4. 接入一个明确目标，验证 action mask、停止梯度、reference 身份和 loss reduction。
-5. 在目标硬件锁定运行环境并检查显存，再进行明确授权的小规模训练。
+1. 指定模型、GPU、运行环境及数据切片，填写独立实验配置。
+2. 在目标硬件验证 FSDP2 Teacher 切换、显存、vLLM 多轮生成和真实参数更新。
+3. 验证跨 rank checkpoint 保存/恢复及无反馈 Student 评测，再执行明确授权的小规模比较。
 
 ## 收益网络讨论
 

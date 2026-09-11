@@ -12,6 +12,17 @@
     "risk_aware_opsd/verpo_topk.py": "d23f0dafa9bf8bae05e5cdce8954ace31fc0581e068cced957c6f33e0350d26e",
     "risk_aware_opsd/length_aware_reward.py": "fdb4f8caf3da9be1ed9de8fc111ef7ae9ed2e3806315296c21329b2b2e5931a8",
     "verl/verl/trainer/distillation/verpo_zpd.py": "ccc095c0218f3c5ff97b88caa95de0a739cbd1d8baeb67f24dad6702156b2425",
-    "verl/verl/trainer/distillation/verpo_topk.py": "94a21c0d3fdab11d4c5428348d314428733f81b7766a74e1b528a26397092fbc"
+    "verl/verl/trainer/distillation/verpo_topk.py": "94a21c0d3fdab11d4c5428348d314428733f81b7766a74e1b528a26397092fbc",
+    "verl/verl/workers/engine_workers.py": "b504972d0d7b8d90ac8b5b6a38b16ba9603fcbcd971bce5051fa4abf2447b8f9",
+    "verl/verl/workers/engine/fsdp/transformer_impl.py": "5368e406a9c91206bbb79d4464a6951fc2c166cac79ddb4b3ab2eb4ab6bdd4bf",
+    "verl/verl/trainer/distillation/snapshot_teacher.py": "a5463f3dd219f6e915281cf1ef69b5a5a0c80101ff150a0fef2aa48c2cf2f10b",
+    "verl/verl/trainer/ppo/v1/trainer_base.py": "991750dc2206f21fdb8eba356d06da1d3a64b63475b060b397b7ac2cb20d0790",
+    "verl/verl/trainer/ppo/v1/trainer_sync.py": "82080d57eff0530ba69cd14a0353ef4b6a6bcfa4eaf45540d6a091cbc679ef82",
+    "verl/verl/trainer/ppo/v1/replay_buffer.py": "54237059b946dde1fc9773154d95f0891618f23f065e6aebacd8ddf466199d97",
+    "verl/verl/trainer/ppo/v1/agent_loop_tq.py": "3c3193f608f4e6e8ff056c5475266734c7b2162198866dfe768a182c2a58c513",
+    "verl/verl/trainer/ppo/core_algos.py": "37fa248bdeeef4311dfa40b799786fd8bd6cd6013319223d2540685fce80f843",
+    "verl/verl/trainer/main_ppo.py": "604768959e638d8e58969c72da65e0e722e0311c575899032e91ec29054250ff",
+    "verl/verl/utils/tensordict_utils.py": "4dc4c321a51e256232751ddb5cb2a2be129076e7f02f36a685fcad6d0d98f5f1",
+    "verl/verl/trainer/config/_generated_ppo_trainer.yaml": "dede95a3c5d8ae313261ffbde0aab4d0a31993a9037c4643a122e88e975b4d1d"
   }
 }
